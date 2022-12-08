@@ -502,7 +502,7 @@ function openCartModal() {
                 document.body.classList.add('no-scroll');
                 mod.classList.add('visible');
             })
-        })
+        });
 
         toCart.forEach((btn) => {
             let mod = document.querySelector('.modal-window[data-modal="cart"]');
