@@ -921,7 +921,7 @@ main {
   }
 }
 
-.add-cart {
+.add-cart, .bot .add-pre {
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -958,7 +958,7 @@ main {
   justify-content: center;
   transition: background-color 0.3s ease;
 
-  svg {
+  svg, img {
     width: 17px;
     height: auto;
 
@@ -974,12 +974,19 @@ main {
   }
 }
 
+.bot .add-pre {
+  background: #FB5743;
+  border-color: #FB5743;
+  color: #fff;
+  font-size: 20px;
+}
+
 .remove-fav {
   cursor: pointer;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 0, 0, 0.43);
+  background: #DBDBDB;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -996,7 +1003,7 @@ main {
   }
 
   &.active, &:hover {
-    background: rgba(255, 0, 0, 0.83);
+    background: #E243A2;
     transition: background-color 0.3s ease;
 
   }
@@ -1274,6 +1281,30 @@ main {
   width: 100%;
   border-top: 1px solid #434343;
   padding: 15px 0;
+}
+
+a.demiweb {
+  border: 1px solid #fff;
+  padding: 4px;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #fff;
+  margin-left: auto;
+  display: flex;
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap;
+
+  img {
+    margin-left: 4px;
+    width: 28px;
+    height: 28px;
+    padding: 3px;
+    box-sizing: border-box;
+    background: #1f1f1f;
+    filter: invert(1);
+  }
 }
 
 .footer-bot__cont {
@@ -2026,6 +2057,12 @@ main {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+
+  &.catalog-center--fav .catalog-list {
+    .product-card {
+      width: calc((100% / 4) - (60px / 4));
+    }
+  }
 }
 
 .catalog-left {
@@ -2501,6 +2538,53 @@ main {
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  .add-cart, .add-pre {
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+      background: #fff;
+      content: "";
+      height: 155px;
+      left: -75px;
+      opacity: 0.2;
+      position: absolute;
+      top: -50px;
+      z-index: 1;
+      display: inline-block;
+      transform: rotate(35deg);
+      animation: movingBgAfter 1.9s infinite cubic-bezier(0.19, 1, 0.22, 1);
+      width: 50px;
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  .add-pre {
+    &::after {
+      background: #fff;
+    }
+
+  }
+}
+
+@keyframes movingBgAfter {
+  0% {
+    left: -75px;
+    opacity: 0.2;
+  }
+  60% {
+    left: 120%;
+    opacity: 0.2;
+  }
+  80% {
+    left: 120%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    left: -75px;
   }
 }
 
@@ -4570,6 +4654,12 @@ main {
 }
 
 @media screen and (max-width: 1020px) {
+
+  .catalog-center.catalog-center--fav .catalog-list {
+    .product-card {
+      width: calc((100% / 3) - (40px / 3));
+    }
+  }
   .info-textuals .map {
     height: 320px;
   }
@@ -4670,6 +4760,7 @@ main {
             position: relative;
 
           }
+
           &:last-child {
             > a {
               border-bottom: none;
@@ -4682,6 +4773,7 @@ main {
             width: 100%;
             display: flex;
             position: relative;
+
             &::after {
               width: 15px;
               height: 15px;
@@ -4830,6 +4922,11 @@ main {
 }
 
 @media screen and (max-width: 767px) {
+  .catalog-center.catalog-center--fav .catalog-list {
+    .product-card {
+      width: calc(50% - (10px / 2));
+    }
+  }
   .catalog-pagin {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -5059,6 +5156,14 @@ main {
 }
 
 @media screen and (max-width: 650px) {
+  .remove-fav {
+    width: 30px;
+    height: 30px;
+
+    img {
+      width: 9px;
+    }
+  }
   .page-404 {
     span {
       font-size: 64px;
@@ -5273,6 +5378,11 @@ main {
 }
 
 @media screen and (max-width: 620px) {
+  a.demiweb {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
   .info-textuals .app-store {
     margin-top: 15px;
   }
@@ -5326,7 +5436,7 @@ main {
       height: 9px;
     }
   }
-  .add-cart {
+  .add-cart, .bot .add-pre {
     width: calc(100% + 16px);
     margin-left: -8px;
     margin-right: -8px;
@@ -5436,10 +5546,16 @@ main {
     padding-bottom: 14px;
   }
   .catalog-center .ocf-btn-mobile-static {
-    width: calc(50% - 5px);
+    width: 100%;
 
     .ocf-btn {
       width: 100%;
+      background: $green;
+      color: #fff;
+    }
+
+    .ocf-sliders {
+      filter: brightness(0) invert(1);
     }
   }
   .catalog-pagin {
