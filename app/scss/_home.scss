@@ -11,7 +11,6 @@ main {
 }
 
 
-
 .header {
   width: 100%;
   position: fixed;
@@ -105,6 +104,10 @@ main {
       transition: box-shadow 0.3s ease;
     }
   }
+
+  .search-icon {
+    display: none;
+  }
 }
 
 .header-center__menu {
@@ -118,6 +121,8 @@ main {
     justify-content: space-between;
 
     li {
+      position: relative;
+
       a {
         font-style: normal;
         font-weight: 400;
@@ -137,6 +142,50 @@ main {
 
         }
       }
+
+      ul {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        top: calc(100% - 10px);
+        left: 0;
+        opacity: 0;
+        background: $dark;
+        padding: 10px;
+        transition: opacity 0.3s ease, top 0.3s ease;
+        pointer-events: none;
+
+        li {
+
+          margin-bottom: 5px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          a {
+            white-space: nowrap;
+
+            strong {
+              color: $green;
+            }
+          }
+        }
+      }
+
+      &.has-submenu {
+        &:hover {
+          ul {
+            opacity: 1;
+            top: 100%;
+            pointer-events: auto;
+          }
+        }
+      }
+
     }
   }
 }
@@ -162,7 +211,7 @@ main {
   padding-right: 20px;
   border-right: 1px solid #434343;
 
-  a {
+  > a {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -184,6 +233,9 @@ main {
     color: #545454;
     margin-bottom: 5px;
 
+    a {
+      color: #545454;
+    }
 
     &:last-child {
       margin-top: auto;
@@ -318,7 +370,7 @@ main {
   }
 }
 
-.search-icon {
+.search-icon, .search-btn {
   position: absolute;
   top: 50%;
   right: 14px;
@@ -334,6 +386,28 @@ main {
     height: 100%;
   }
 
+}
+
+.search-btn {
+  width: 40px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
+  transition: border 0.3s ease;
+  padding: 12px;
+  right: 0;
+  border-radius: 5px;
+  pointer-events: auto;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &:hover {
+    border-color: $green;
+  }
 }
 
 
@@ -1278,9 +1352,13 @@ main {
   box-sizing: border-box;
   transition: opacity 0.3s ease, transform 0.7s ease;
   opacity: 0;
-  transform: translate(0, -110%);
+  transform: translate(0, 0);
+  pointer-events: none;
+  transition-delay: 0.5s;
+  overflow-x: hidden;
 
   &.visible {
+    pointer-events: auto;
     opacity: 1;
     transform: translate(0, 0);
   }
@@ -1298,6 +1376,22 @@ main {
 .modal-container {
   position: relative;
   z-index: 2;
+  transform: translate(110%, 0);
+  transition: transform 0.4s ease;
+  transition-delay: 0s;
+}
+
+.modal-window {
+  transition-delay: 0s;
+
+  &.visible {
+    .modal-container {
+      transition: transform 0.4s ease;
+      transform: translate(0, 0);
+
+      transition-delay: 0.4s;
+    }
+  }
 }
 
 .modal-menu {
@@ -1340,6 +1434,10 @@ main {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+
+  .header-center__menu {
+    display: none;
+  }
 }
 
 .modal-menu__menu {
@@ -1572,7 +1670,7 @@ main {
       top: 50%;
       right: 0;
       transform: translate(0, -50%) rotate(-90deg);
-      background: url("../img/arrow-down.png") no-repeat center / 100%;
+      background: url("../img/arrow-down.svg") no-repeat center / 100%;
     }
 
     p {
@@ -2508,6 +2606,7 @@ main {
   flex-shrink: 0;
   margin-right: 32px;
   height: 615px;
+  cursor: pointer;
 
   .dots {
     position: absolute;
@@ -3931,6 +4030,7 @@ main {
   align-items: center;
   justify-content: center;
   padding: 20px 0;
+
   span {
     font-family: $second-font;
     font-size: 94px;
@@ -3939,6 +4039,7 @@ main {
     margin-bottom: 20px;
     color: #fff;
   }
+
   p {
     font-size: 24px;
     line-height: 1.2;
@@ -3946,6 +4047,7 @@ main {
     font-weight: 400;
     margin-bottom: 25px;
   }
+
   a {
     height: 60px;
     width: 100%;
@@ -4111,7 +4213,7 @@ main {
     font-size: 13px;
     line-height: 1.2;
   }
-  .header-contacts a {
+  .header-contacts > a {
     font-size: 17px;
     line-height: 1.2;
   }
@@ -4407,7 +4509,7 @@ main {
     top: 14px;
     right: 14px;
   }
-  .header-contacts a {
+  .header-contacts > a {
     font-size: 14px;
     line-height: 1.2;
   }
@@ -4540,6 +4642,69 @@ main {
   }
   .header-center__menu {
     display: none;
+  }
+  .modal-menu__cont {
+    .header-center__menu {
+      display: flex;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $dark;
+      margin-bottom: 10px;
+      margin-top: 40px;
+      border-radius: 5px;
+
+      > ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        > li {
+          width: 100%;
+
+          > a {
+            width: 100%;
+            padding: 8px 0;
+            border-bottom: 1px solid $dark;
+            position: relative;
+
+          }
+          &:last-child {
+            > a {
+              border-bottom: none;
+            }
+          }
+
+
+          a {
+            color: $dark;
+            width: 100%;
+            display: flex;
+            position: relative;
+            &::after {
+              width: 15px;
+              height: 15px;
+              display: inline-block;
+              content: '';
+              position: absolute;
+              top: 50%;
+              right: 0;
+              transform: translate(0, -50%) rotate(-90deg);
+              background: url("../img/arrow-down.svg") no-repeat center / 100%;
+            }
+          }
+
+          ul {
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            display: none;
+          }
+
+        }
+      }
+    }
   }
   .header-right .header-contacts {
     display: none;
@@ -4898,11 +5063,13 @@ main {
     span {
       font-size: 64px;
     }
+
     p {
       font-size: 18px;
       line-height: 1.2;
       text-align: center;
     }
+
     .btn {
       height: 45px;
       font-size: 18px;
@@ -5252,6 +5419,18 @@ main {
 }
 
 @media screen and (max-width: 600px) {
+  .search-btn {
+    height: 36px;
+    padding: 6px;
+    width: 42px;
+    right: 20px;
+  }
+  .search-icon {
+
+  }
+  .search-block .search-icon {
+    display: flex;
+  }
   .hero {
     padding-top: 14px;
     padding-bottom: 14px;
