@@ -305,6 +305,23 @@ openSeach();
 
 //search focus
 
+//open pages all
+
+let selectOpener = [...document.querySelectorAll('.info-pages__list .active-page')];
+
+
+function changePageActive() {
+    if (selectOpener.length) {
+        selectOpener.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+            })
+        })
+    }
+}
+changePageActive();
+//open pages all
+
 //modal windows
 
 //modal window
@@ -324,9 +341,13 @@ function controlModal() {
                 e.preventDefault();
                 e.stopPropagation();
 
+                if (document.querySelector('.modal-window.visible')) {
+                    document.querySelector('.modal-window.visible').classList.remove('visible');
+                }
                 modals.forEach((mod) => {
                     if (mod.dataset.modal === data) {
                         document.body.classList.add('no-scroll');
+
                         mod.classList.add('visible');
                         if (mod.querySelector('.main-title')) {
                             setTimeout(() => {
