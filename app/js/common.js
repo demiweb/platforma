@@ -104,7 +104,9 @@ function startProductSlider() {
                 slidesPerGroup: 1,
                 speed: 600,
 
-                autoplay: false,
+                autoplay: {
+                    delay: 3500,
+                },
                 spaceBetween: 40,
                 pagination: {
                     el: pagin,
@@ -140,10 +142,7 @@ function mainBannerSlider() {
                 slidesPerGroup: 1,
                 speed: 600,
 
-                autoplay: {
-                    delay: 4500,
-                    disableOnInteraction: false,
-                },
+                autoplay: false,
                 spaceBetween: 40,
                 pagination: {
                     el: pagin,
@@ -183,10 +182,7 @@ function lineStartSlider() {
                     nextEl: sldNext,
                     prevEl: sldPrev,
                 },
-                autoplay: {
-                    // delay: 6500,
-                    disableOnInteraction: true,
-                },
+                autoplay: false,
                 spaceBetween: 10,
                 breakpoints: {
                     1025: {
@@ -228,10 +224,7 @@ function modelStartSlider() {
                     nextEl: sldNext,
                     prevEl: sldPrev,
                 },
-                autoplay: {
-                    // delay: 6500,
-                    disableOnInteraction: true,
-                },
+                autoplay: false,
                 spaceBetween: 5,
                 breakpoints: {
                     1455: {
@@ -258,38 +251,6 @@ modelStartSlider();
 //sliders
 
 //search focus
-
-let searchInput = [...document.querySelectorAll('.search-block input')];
-
-function searchFocusing() {
-    if (searchInput.length) {
-        let backPlate = document.querySelector('.search-backplate')
-        searchInput.forEach((btn) => {
-            btn.addEventListener('focus', () => {
-                backPlate.classList.add('vis');
-                if (btn.value !== '') {
-                    btn.closest('.search-wrap').classList.add('ready');
-                }
-            });
-            btn.addEventListener('focusout', () => {
-                backPlate.classList.remove('vis');
-                btn.closest('.search-wrap').classList.remove('ready');
-            });
-            btn.addEventListener('input', () => {
-                if (btn.value === '') {
-                    btn.closest('.search-wrap').classList.remove('ready');
-                } else {
-                    btn.closest('.search-wrap').classList.add('ready');
-
-                }
-            })
-        });
-
-
-    }
-}
-
-searchFocusing();
 
 let searchIcon = document.querySelector('.search-icon');
 
@@ -319,6 +280,7 @@ function changePageActive() {
         })
     }
 }
+
 changePageActive();
 //open pages all
 
@@ -355,6 +317,9 @@ function controlModal() {
 
                             }, 500);
                         }
+                        if (mod.classList.contains('modal-video')) {
+                            mod.querySelector('iframe').src = btn.dataset.link;
+                        }
                     }
                 })
             })
@@ -369,6 +334,9 @@ function controlModal() {
 
 
                 }
+                if (btn.closest('.modal-window').classList.contains('modal-video')) {
+                    btn.closest('.modal-window').querySelector('iframe').src = '';
+                }
             })
         });
         backplates.forEach((btn) => {
@@ -380,6 +348,9 @@ function controlModal() {
                     btn.closest('.modal-window').querySelector('.main-title').classList.remove('done');
 
 
+                }
+                if (btn.closest('.modal-window').classList.contains('modal-video')) {
+                    btn.closest('.modal-window').querySelector('iframe').src = '';
                 }
             })
         })
@@ -508,78 +479,6 @@ function openPreModal() {
 
 openPreModal();
 
-let btnCart = [...document.querySelectorAll('.add-cart')];
-let toCart = [...document.querySelectorAll('.to-cart')];
-
-function openCartModal() {
-    if (btnCart.length) {
-        btnCart.forEach((btn) => {
-            let mod = document.querySelector('.modal-window[data-modal="cart"]');
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                btn.classList.toggle('active');
-
-                document.body.classList.add('no-scroll');
-                mod.classList.add('visible');
-            })
-        });
-
-        toCart.forEach((btn) => {
-            let mod = document.querySelector('.modal-window[data-modal="cart"]');
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                document.body.classList.add('no-scroll');
-                mod.classList.add('visible');
-            })
-        })
-    }
-}
-
-openCartModal();
-
-
-//add fav
-
-let addFav = [...document.querySelectorAll('.add-fav')];
-
-function addingFav() {
-    if (addFav.length) {
-        addFav.forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                btn.classList.toggle('active');
-            })
-        })
-    }
-}
-
-addingFav();
-
-
-//add fav
-//remove fav
-
-let removeFav = [...document.querySelectorAll('.remove-fav')];
-
-function removingFav() {
-    if (removeFav.length) {
-        removeFav.forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                btn.closest('.product-card').remove();
-            })
-        })
-    }
-}
-
-removingFav();
-
-//remove fav
-
 
 // Получаем нужный элемент
 var elementBtns = document.querySelector('.product-pricing');
@@ -627,37 +526,20 @@ window.addEventListener('scroll', function () {
 Visible(elementBtns);
 
 
-let quantButton = [...document.querySelectorAll('.quantity__button')];
+//remove item from cart
 
-function upValueQuant() {
-    if (!quantButton.length) {
+let singleItemCart = [...document.querySelectorAll('.single-order .rem')];
 
-    } else {
-        quantButton.forEach((btn) => {
-            btn.querySelector('button').addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (btn.classList.contains('quantity__button--minus')) {
-                    let val = btn.closest('.quantity-field').querySelector('.quantity input').value;
-                    if (Number(val) === 0) {
-
-                    } else {
-                        let newVal = Number(val) - 1;
-                        btn.closest('.quantity-field').querySelector('.quantity input').value = newVal;
-                    }
-
-
-                } else {
-                    let val = btn.closest('.quantity-field').querySelector('.quantity input').value;
-
-                    let newVal = Number(val) + 1;
-                    btn.closest('.quantity-field').querySelector('.quantity input').value = newVal;
-
-                }
+function removeItemCart() {
+    if (singleItemCart.length) {
+        singleItemCart.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                btn.closest('.single-order').remove();
             })
         })
     }
 }
+removeItemCart();
 
-upValueQuant();
+//remove item from cart
 

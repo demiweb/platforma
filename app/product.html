@@ -7,10 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
+
     <link rel="stylesheet" href="./css/main.min.css">
 </head>
 <body>
@@ -31,11 +28,12 @@
         <div class="container">
             <div class="product-block">
                 <div class="control">
+
                     <div class="add-fav">
                         <svg width="17" height="15" viewBox="0 0 17 15" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15.6548 7.74893C17.4047 5.97956 17.4047 3.10063 15.6548 1.33127C14.8061 0.47275 13.6771 0 12.4763 0C12.476 0 12.476 0 12.476 0C11.2752 0 10.1458 0.47275 9.29686 1.33127L8.4836 2.15336L7.67034 1.33127C6.82137 0.47275 5.69236 0 4.49121 0C3.29042 0 2.16141 0.47275 1.31244 1.33127C-0.437479 3.10063 -0.437479 5.97956 1.31244 7.74893L8.4836 15L15.6548 7.74893ZM1.81524 1.82841C2.5302 1.10532 3.48101 0.70718 4.49121 0.70718C5.50177 0.70718 6.45258 1.10532 7.16754 1.82841L8.4836 3.15933L9.79966 1.82841C10.5146 1.10532 11.4654 0.70718 12.476 0.70718C13.4865 0.70718 14.437 1.10532 15.152 1.82841C16.631 3.32375 16.631 5.75645 15.152 7.25178L8.4836 13.9944L1.81524 7.25178C0.336176 5.75645 0.336176 3.32339 1.81524 1.82841Z"
-                            />
+                            <path d="M8.612,2.347L8,2.997l-0.612-0.65c-1.69-1.795-4.43-1.795-6.12,0c-1.69,1.795-1.69,4.706,0,6.502l0.612,0.65L8,16
+	l6.12-6.502l0.612-0.65c1.69-1.795,1.69-4.706,0-6.502C13.042,0.551,10.302,0.551,8.612,2.347z"></path>
                         </svg>
 
                     </div>
@@ -56,6 +54,9 @@
                     MacBook Pro M1 Pro 14'' 512GB Space Gray (M KGP3UA)
                 </h1>
                 <div class="product-photos">
+                    <div class="btn-mod" data-mod="video" data-link="https://www.youtube.com/embed/s6QqV5NwbJE">
+                        Відео огляд
+                    </div>
                     <div class="product-photos__cont swiper-container">
                         <div class="swiper-wrapper">
                             <div class="product-photo swiper-slide">
@@ -239,6 +240,9 @@
                         <button class="btn btn--yellow btn-credit">
                             Придбати в кредит
                         </button>
+                        <button class="btn btn--orange btn-trade btn-mod" data-mod="trade">
+                            Trade-in
+                        </button>
                     </div>
                     <div class="product-payment-systems">
                         <ul>
@@ -326,6 +330,7 @@
                                         61 999 грн
                                     </p>
                                     <div class="add-cart">
+                                        <p>Купити</p>
                                         <svg width="14" height="15" viewBox="0 0 14 15" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd"

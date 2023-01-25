@@ -3,7 +3,7 @@ body {
 }
 
 main {
-  padding-top: 112px;
+  padding-top: 102px;
 
   > section:first-child {
     margin-top: 20px;
@@ -113,7 +113,7 @@ main {
 
 .header-center__menu {
   width: 100%;
-  padding-top: 17px;
+  padding-top: 9px;
 
   ul {
     width: 100%;
@@ -252,6 +252,9 @@ main {
   align-items: stretch;
   justify-content: flex-start;
   flex-wrap: wrap;
+  > .btn-mod {
+    display: none;
+  }
 }
 
 .burger {
@@ -261,7 +264,7 @@ main {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  padding: 18px 25px;
+  padding:40px 30%;
   box-sizing: border-box;
   transition: background-color 0.3s ease;
   cursor: pointer;
@@ -289,12 +292,11 @@ main {
 
 .sqr-header {
   width: calc(100% / 3);
-  height: 50%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid #434343;
-  border-bottom: 1px solid #434343;
+  border: none;
 
   &:nth-child(4), &:nth-child(5), &:nth-child(6) {
     border-bottom: none;
@@ -322,7 +324,7 @@ main {
       position: absolute;
       font-size: 9px;
       line-height: 1;
-      top: 10px;
+      top: 35%;
       right: 40%;
       transform: translate(50%, 0);
     }
@@ -926,6 +928,7 @@ main {
       }
     }
   }
+
   &:hover {
     .bot {
       .add-cart, .add-pre {
@@ -939,7 +942,7 @@ main {
 
 }
 
-@keyframes  moveSvg{
+@keyframes moveSvg {
   0% {
     transform: translate(0px, 0);
   }
@@ -954,8 +957,8 @@ main {
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
-   -webkit-appearance: none;
-   margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .tag {
@@ -1006,6 +1009,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   background: #000000;
   transition: background-color 0.3s ease;
 
+  > p {
+    display: none;
+  }
   svg {
     height: 15px;
     width: auto;
@@ -1038,13 +1044,26 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
     path {
       fill: #fff;
+
+      transition: stroke 0.3s ease, fill 0.3s ease;
     }
   }
 
-  &.active, &:hover {
-    background: #E243A2;
-    transition: background-color 0.3s ease;
 
+  &.active, &:hover {
+    svg {
+      path {
+        transition: stroke 0.3s ease, fill 0.3s ease;
+
+
+          fill: #E243A2;
+
+
+      }
+
+      transition: background-color 0.3s ease;
+
+    }
   }
 }
 
@@ -1461,7 +1480,24 @@ a.demiweb {
   pointer-events: none;
   transition-delay: 0.5s;
   overflow-x: hidden;
-
+  &.modal-video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .modal-container {
+      width: 1800px;
+      height: 1000px;
+      max-height: 95vh;
+      background: #fff;
+      border-radius: 20px;
+      padding: 50px 100px;
+      video, iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
   &.visible {
     pointer-events: auto;
     opacity: 1;
@@ -2787,6 +2823,26 @@ a.demiweb {
     display: inline-block;
     margin-right: 4px;
   }
+  .btn-mod {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 4px 7px;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: $main-color;
+    border: 2px solid #e243a2;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 4;
+    &:hover {
+      background: #e243a2;
+      color: #fff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  }
 }
 
 .product-photos__cont {
@@ -2848,6 +2904,7 @@ a.demiweb {
 }
 
 .btn {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3084,7 +3141,7 @@ a.demiweb {
   table {
     tr td:first-child {
       color: #8B8B8B;
-      padding-left: 0;
+
     }
 
     tr {
@@ -3169,7 +3226,14 @@ a.demiweb {
   margin-bottom: auto;
   padding-bottom: 20px;
   border-bottom: 1px solid #DFDFDF;
-
+> p {
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
   & + .preorder-block {
     margin-top: 20px;
   }
@@ -3188,6 +3252,17 @@ a.demiweb {
   align-items: flex-start;
   justify-content: flex-start;
   padding-bottom: 20px;
+  > .btn {
+    width: 100%;
+  }
+  > p {
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+
+  }
 
   > span {
     display: inline-block;
@@ -3320,13 +3395,13 @@ a.demiweb {
 .product-top-line {
   width: 100%;
   position: fixed;
-  top: 112px;
+  bottom: 0;
   left: 0;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(3px);
   z-index: 5;
-  transform: translate(0, -150%);
+  transform: translate(0, 150%);
   transition: transform 0.4s ease-in-out;
 
   &.visible {
@@ -3368,6 +3443,7 @@ a.demiweb {
     display: inline-block;
     margin-right: 25px;
   }
+
   .btn {
     position: relative;
     overflow: hidden;
@@ -3777,6 +3853,25 @@ a.demiweb {
   align-items: center;
   justify-content: flex-start;
   padding: 11px;
+  position: relative;
+  .rem{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EBEBEB;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    img {
+      width: 8px;
+      height: auto;
+    }
+  }
 
   .img {
     width: 113px;
@@ -4249,7 +4344,15 @@ a.demiweb {
 }
 
 @media screen and (max-width: 1650px) {
-  .modal-close {
+  .container {
+    max-width: 90%;
+  }
+  .product-lines__cont {
+
+    padding-left: calc(((100% - 90%) / 2) + 15px);
+    padding-right: calc(((100% - 90%) / 2) + 15px);
+  }
+    .modal-close {
     top: 20px;
     right: 30px;
   }
@@ -4365,7 +4468,7 @@ a.demiweb {
     padding-top: 84%;
   }
   .product-card {
-    height: 375px;
+    height: 418px;
   }
   .emoji-cont p {
     font-size: 26px;
@@ -4399,7 +4502,7 @@ a.demiweb {
     padding-right: 12px;
   }
   .burger {
-    padding: 18px 14px;
+    padding: 35px 24%;
   }
   .header-contacts p {
     font-size: 13px;
@@ -4438,6 +4541,11 @@ a.demiweb {
     width: 26px;
     height: 26px;
     padding: 4px;
+  }
+}
+@media screen and (max-width: 1450px) {
+  .catalog-left {
+    width: 300px;
   }
 }
 
@@ -4482,6 +4590,11 @@ a.demiweb {
 }
 
 @media screen and (max-width: 1220px) {
+  .header {
+    .container {
+      max-width: 100%;
+    }
+  }
   .search-wrap__links a p {
     font-size: 13px;
 
@@ -4596,6 +4709,12 @@ a.demiweb {
 }
 
 @media screen and (max-width: 1025px) {
+  .header-sqr>.btn-mod {
+    display: flex;
+  }
+  .sqr-header {
+    width: calc(100% / 4);
+  }
   .hero {
     min-height: 160px;
   }
@@ -4604,7 +4723,7 @@ a.demiweb {
     margin-top: 25px;
   }
   .product-top-line {
-    top: 90px;
+    //top: 90px;
   }
 
   .product-info__content .product-card {
@@ -4695,7 +4814,7 @@ a.demiweb {
     padding: 24px 30px 24px 30px;
   }
   main {
-    padding-top: 90px;
+    padding-top: 74px;
   }
   .modal-close {
     top: 14px;
@@ -4726,10 +4845,10 @@ a.demiweb {
     padding-top: 10px;
   }
   .burger {
-    padding: 12px 14px;
+    padding: 25px 13px;
   }
   .header-center__menu {
-    padding-top: 10px;
+    padding-top: 3px;
   }
   .header-center {
     padding-top: 8px;
@@ -4805,12 +4924,12 @@ a.demiweb {
     max-width: 100%;
   }
   .product-top-line {
-    top: 75px;
+    //top: 75px;
   }
   .sqr-header {
     a {
       span {
-        top: 5px;
+        top: 25%;
         right: 36%;
       }
     }
@@ -4820,7 +4939,7 @@ a.demiweb {
     width: 260px;
   }
   main {
-    padding-top: 74px;
+    padding-top: 62px;
 
     section {
       &:first-child {
@@ -4832,7 +4951,7 @@ a.demiweb {
     width: 56px;
   }
   .burger {
-    padding: 9px 19px;
+    padding: 22px 15px;
   }
   .header-center {
     justify-content: center;
@@ -4918,7 +5037,7 @@ a.demiweb {
     flex-shrink: 0;
     flex-grow: 0;
     margin-left: auto;
-    max-width: 230px;
+    max-width: 250px;
     width: 100%;
   }
   .modal-menu__head .logo {
@@ -4926,7 +5045,7 @@ a.demiweb {
   }
   .header-sqr {
     width: 100%;
-    max-width: 230px;
+    max-width: 250px;
     margin-left: auto;
     border-left: 1px solid #434343;
   }
@@ -4983,6 +5102,9 @@ a.demiweb {
 }
 
 @media screen and (max-width: 779px) {
+  .product-card {
+    height: 350px;
+  }
   .catalog-center .ocf-btn-mobile-static {
     width: 100%;
 
@@ -5219,6 +5341,13 @@ a.demiweb {
 }
 
 @media screen and (max-width: 767px) {
+  .modal-window {
+    &.modal-video {
+      .modal-container {
+        padding: 60px 10px;
+      }
+    }
+  }
   .catalog-center.catalog-center--fav .catalog-list {
     .product-card {
       width: calc(50% - (10px / 2));
@@ -5667,9 +5796,25 @@ a.demiweb {
     margin-right: -8px;
     height: 36px;
     border-radius: 0 0 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > p {
+      display: flex;
+      font-size: 12px;
+      line-height: 1.1;
+      margin-right: 10px;
+      color: #fff;
+      font-weight: bold;
+    }
 
     svg {
       height: 18px;
+    }
+    &.active {
+      > p {
+        display: none;
+      }
     }
   }
   .product-card .bot {
