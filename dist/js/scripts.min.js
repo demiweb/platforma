@@ -543,3 +543,41 @@ removeItemCart();
 
 //remove item from cart
 
+//menu subMenu
+let submenuItems = [...document.querySelectorAll('.modal-menu__cont .header-center__menu .has-submenu > a')];
+
+function controlSubMenu() {
+    if (submenuItems.length) {
+        submenuItems.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                btn.closest('.has-submenu').classList.toggle('open');
+            })
+        })
+    }
+}
+
+controlSubMenu();
+
+//menu subMenu
+
+//faq
+let faqItems = [...document.querySelectorAll('.single-faq .faq-head')];
+
+function controlFaq() {
+    if (faqItems.length) {
+        faqItems.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                btn.closest('.single-faq').classList.toggle('open');
+            })
+        })
+    }
+}
+
+controlFaq();
+
+//faq
+
