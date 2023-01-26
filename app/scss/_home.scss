@@ -1068,6 +1068,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
     }
   }
+  &.active {
+    background: rgba(255, 255, 255, 0);
+    &:hover {
+      background: #DBDBDB;
+      transition: background-color 0.3s ease;
+    }
+  }
 }
 
 .bot .add-pre {
@@ -4553,6 +4560,14 @@ a.demiweb {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+.faq-title {
+  font-size: 34px !important;
+  line-height: 1.2 !important;
+  font-family: $second-font;
+  color: #fff !important;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
 .faq-list {
   width: 100%;
   display: flex;
@@ -4565,7 +4580,7 @@ a.demiweb {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #ffffff40;
   &:last-child {
     border-bottom: none;
   }
@@ -4585,7 +4600,8 @@ a.demiweb {
     height: 30px;
     display: inline-block;
     content: '';
-    transform: translate(0, -50%);
+    transform: translate(0, -50%) rotate(-90deg);
+    transition: transform 0.3s ease;
     background: url(../image/arrow-down.svg) no-repeat center/100%;;
   }
   p {
@@ -4598,7 +4614,8 @@ a.demiweb {
 .faq-text {
   width: 100%;
   .text {
-    padding-left: 15px;
+    padding-left: 35px;
+    padding-right: 60px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -4675,6 +4692,7 @@ a.demiweb {
 
   max-height: 0;
   overflow: hidden;
+  transition: max-height 0.5s ease-out;
 }
 .single-faq {
   margin-bottom: 20px;
@@ -4684,6 +4702,13 @@ a.demiweb {
   &.open {
     .faq-text {
       max-height: 1000px;
+      transition: max-height 1.4s ease-out;
+    }
+    .faq-head {
+      &::after {
+        transition: transform 0.3s ease;
+        transform: translate(0, -50%);
+      }
     }
   }
 }
@@ -5818,6 +5843,15 @@ a.demiweb {
   line-height: 1.1;
 }
 @media screen and (max-width: 767px) {
+  .faq-title {
+    font-size: 22px !important;
+    font-weight: 600;
+    line-height: 1.2 !important;
+    font-family: $second-font;
+    color: #fff !important;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
   .catalog-content, .content-list {
     > p {
       font-size: 18px;
@@ -6078,6 +6112,26 @@ a.demiweb {
 }
 
 @media screen and (max-width: 650px) {
+  .header {
+    border: none;
+  }
+  .header-sqr {
+    border-left: none;
+  }
+  .search-block .search-icon {
+    width: 52px;
+    padding-left: 4px;
+    padding-right: 4px;
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+  .header-container .logo {
+    border: none;
+  }
+  .modal-window.modal-video .modal-container {
+    max-height: 45vh;
+  }
   .remove-fav {
     width: 30px;
     height: 30px;
