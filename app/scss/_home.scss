@@ -638,7 +638,7 @@ main {
 .slider-btn {
   width: 50px;
   height: 50px;
-  background: url("../img/arr-b-r.png") no-repeat center / 100%;
+  background: url("../image/arr-b-r.png") no-repeat center / 100%;
   position: absolute;
   top: 50%;
   right: 80px;
@@ -1586,8 +1586,29 @@ a.demiweb {
   .header-center__menu {
     display: none;
   }
+  .header-contacts {
+    width: 100%;
+    border: none;
+  }
 }
 
+.modal-menu__cont {
+  flex-grow: 1;
+  padding-bottom: 20px;
+  .header-contacts {
+    margin-top: auto;
+    width: 100%;
+    border: none;
+    > .btn {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0);
+      color: $main-color !important;
+    }
+
+  }
+}
 .modal-menu__menu {
   width: 100%;
   padding-top: 18px;
@@ -1837,7 +1858,7 @@ a.demiweb {
       top: 50%;
       right: 0;
       transform: translate(0, -50%) rotate(-90deg);
-      background: url("../img/arrow-down.svg") no-repeat center / 100%;
+      background: url("../image/arrow-down.svg") no-repeat center / 100%;
     }
 
     p {
@@ -2285,7 +2306,7 @@ a.demiweb {
   &::before {
     width: 32px;
     height: 32px;
-    background: url("../img/loadmore.svg") no-repeat center / 100%;
+    background: url("../image/loadmore.svg") no-repeat center / 100%;
     display: inline-block;
     content: '';
     position: absolute;
@@ -2947,11 +2968,29 @@ a.demiweb {
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 24px;
+      height: auto;
+      margin-left: 15px;
+      path {
+        fill: #e243a2;
+        transition: fill 0.3s ease;
+      }
+    }
 
     &:hover {
       background: #e243a2;
       color: #fff;
       transition: background-color 0.3s ease, color 0.3s ease;
+      svg {
+        path {
+          fill: #fff;
+          transition: fill 0.3s ease;
+        }
+      }
     }
   }
 }
@@ -3470,6 +3509,7 @@ a.demiweb {
 }
 .pre-check {
   width: 100%;
+  margin-bottom: 13px;
   > p {
     font-size: 14px;
     font-weight: 500;
@@ -3534,7 +3574,7 @@ a.demiweb {
     min-height: 60px;
   }
   select {
-    background: url("../img/arrow-down.svg") no-repeat 98% center / 16px,  #EBEBEB;
+    background: url("../image/arrow-down.svg") no-repeat 98% center / 16px,  #EBEBEB;
   }
 }
 
@@ -4172,6 +4212,9 @@ a.demiweb {
     font-size: 20px;
     line-height: 24px;
     color: #000000;
+    + p {
+      display: none;
+    }
 
     strong {
       font-style: normal;
@@ -4385,7 +4428,7 @@ a.demiweb {
     -webkit-appearance: none; /* Safari and Chrome */
     appearance: none;
     width: 100%;
-    background: url("../img/arrow-down.png") no-repeat calc(100% - 14px) center / 20px, #323232;
+    background: url("../image/arrow-down.png") no-repeat calc(100% - 14px) center / 20px, #323232;
     border-radius: 5px;
 
     font-style: normal;
@@ -4403,6 +4446,7 @@ a.demiweb {
   .single-detail {
     width: 100%;
     margin-bottom: 13px;
+    gap: 10px;
 
 
     background: rgba(255, 255, 255, 0);
@@ -4419,17 +4463,19 @@ a.demiweb {
     p {
       font-style: normal;
       font-weight: 400;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 120%;
       color: #8B8B8B;
+
     }
 
     span {
       font-style: normal;
       font-weight: 400;
-      font-size: 20px;
+      font-size: 16px;
       line-height: 120%;
       color: #fff;
+      max-width: 750px;
     }
   }
 }
@@ -4540,7 +4586,7 @@ a.demiweb {
     display: inline-block;
     content: '';
     transform: translate(0, -50%);
-    background: url(../img/arrow-down.svg) no-repeat center/100%;;
+    background: url(../image/arrow-down.svg) no-repeat center/100%;;
   }
   p {
     font-size: 20px;
@@ -5323,7 +5369,7 @@ a.demiweb {
             padding: 8px 0;
             border-bottom: none;
             position: relative;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 600;
 
           }
@@ -5350,7 +5396,7 @@ a.demiweb {
               top: 50%;
               right: 0;
               transform: translate(0, -50%) rotate(-90deg);
-              background: url("../img/arrow-down.svg") no-repeat center / 100%;
+              background: url("../image/arrow-down.svg") no-repeat center / 100%;
             }
           }
 
@@ -5407,7 +5453,7 @@ a.demiweb {
 
               a {
                 width: 100%;
-                font-size: 13px;
+                font-size: 15px;
                 line-height: 1;
                 font-weight: 600;
                 padding: 3px 0;
@@ -5566,7 +5612,7 @@ a.demiweb {
         top: 50%;
         display: inline-block;
         content: '';
-        background: url("../img/arrow-down.svg") no-repeat center / 100%;
+        background: url("../image/arrow-down.svg") no-repeat center / 100%;
         position: absolute;
         transform: translate(0, -50%);
         transition: transform 0.3s ease;
@@ -6107,6 +6153,7 @@ a.demiweb {
   .order-details .single-detail {
     padding: 9px 0;
     margin-bottom: 9px;
+    flex-wrap: wrap;
 
     p, span {
       font-size: 14px;
@@ -6737,5 +6784,10 @@ a.demiweb {
       max-height: 100%;
       width: auto;
     }
+  }
+}
+@media screen and (max-width: 340px) {
+  .header-right {
+    max-width: 184px;
   }
 }
