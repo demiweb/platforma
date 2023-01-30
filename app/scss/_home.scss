@@ -4749,8 +4749,20 @@ a.demiweb {
     }
   }
 }
+.emoji-cont p {
+  max-width: none;
+  br {
+    display: none;
+  }
+}
 
+.simple-content {
+  width: 100%;
+}
 @media screen and (max-width: 1650px) {
+  .header-center {
+    padding-top: 16px;
+  }
   .container {
     max-width: 90%;
   }
@@ -4993,10 +5005,24 @@ a.demiweb {
   .emoji-cont p {
     font-size: 22px;
     line-height: 1.2;
-    max-width: 500px;
+    //max-width: 500px;
   }
 }
 
+body ul.dropdown-address {
+  width: 100%;
+  background: #8b8b8b;
+  li {
+    border-bottom: 1px solid #9f9f9f;
+    a {
+      color: #ffff !important;
+      &:hover {
+        background: #1f1f1f !important;
+      }
+    }
+  }
+
+}
 @media screen and (max-width: 1220px) {
   .header {
     .container {
