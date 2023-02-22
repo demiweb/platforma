@@ -85,7 +85,10 @@ function burgerControl() {
 
 burgerControl();
 
+//chars hovering
+
 //sliders
+
 
 let productSlider = [...document.querySelectorAll('.product-photos')];
 
@@ -93,9 +96,39 @@ function startProductSlider() {
     if (!productSlider.length) {
 
     } else {
+        let charsSingle = [...document.querySelectorAll('.single-char')];
+        let colorsSingle = [...document.querySelectorAll('.single-color')];
+
         productSlider.forEach((sld) => {
             let sldCont = sld.querySelector('.product-photos__cont');
             let pagin = sld.querySelector('.dots');
+
+
+            let sldThumb = sld.querySelector('.product-photos__thumbs');
+
+
+            var swiperThumb = new Swiper(sldThumb, {
+                spaceBetween: 15,
+                slidesPerView: 4,
+                freeMode: false,
+                watchSlidesProgress: true,
+                direction: 'horizontal',
+                centeredSlides: false,
+                loop: false,
+                draggable: true,
+                breakpoints: {
+                    2000: {
+                        slidesPerView: 5,
+                    },
+                    1100: {
+                        slidesPerView: 4,
+                    },
+                    751: {
+                        slidesPerView: 3,
+                    },
+                }
+
+            });
 
             const swiper2 = new Swiper(sldCont, {
                 // Optional parameters
@@ -114,13 +147,46 @@ function startProductSlider() {
                     clickable: true,
                     bulletClass: 'single-dot',
                     bulletActiveClass: 'active',
+                },
+                thumbs: {
+                    swiper: swiperThumb,
                 }
 
 
             });
+
+            if (charsSingle.length) {
+                let dotPhotoSlider = [...document.querySelectorAll('.product-photos .single-dot')][0];
+                charsSingle.forEach((btn) => {
+                    btn.addEventListener('mouseover', () => {
+                        dotPhotoSlider.click();
+                        swiper2.autoplay.stop();
+                    });
+                    btn.addEventListener('mouseout', () => {
+                        swiper2.autoplay.start();
+                    })
+                });
+
+                colorsSingle.forEach((btn) => {
+                    btn.addEventListener('mouseover', () => {
+                        dotPhotoSlider.click();
+                        swiper2.autoplay.stop();
+                    });
+                    btn.addEventListener('mouseout', () => {
+                        swiper2.autoplay.start();
+                    })
+                })
+            }
         })
+
     }
 }
+
+
+
+
+
+//chars hovering
 
 startProductSlider();
 
@@ -176,13 +242,14 @@ function lineStartSlider() {
                 // Optional parameters
                 loop: false,
                 slidesPerView: 2,
-                slidesPerGroup: 1,
-                speed: 600,
+
                 navigation: {
                     nextEl: sldNext,
                     prevEl: sldPrev,
                 },
                 autoplay: false,
+                direction: 'horizontal',
+                // cssMode: true,
                 spaceBetween: 10,
                 breakpoints: {
                     1025: {
@@ -246,7 +313,7 @@ function modelStartSlider() {
     }
 }
 
-modelStartSlider();
+// modelStartSlider();
 
 //sliders
 
@@ -291,6 +358,7 @@ changePageActive();
 let btnMod = [...document.querySelectorAll('.btn-mod')];
 let modals = [...document.querySelectorAll('.modal-window')];
 let closeModal = [...document.querySelectorAll('.modal-close')];
+let clsSecModal = [...document.querySelectorAll('.modal-window .cls')];
 let backplates = [...document.querySelectorAll('.backplate')];
 
 function controlModal() {
@@ -353,7 +421,18 @@ function controlModal() {
                     btn.closest('.modal-window').querySelector('iframe').src = '';
                 }
             })
-        })
+        });
+        if (clsSecModal.length) {
+            clsSecModal.forEach((btn) => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    btn.closest('.modal-window').classList.remove('visible');
+                    document.body.classList.remove('no-scroll');
+
+                })
+            });
+        }
     }
 }
 
@@ -479,9 +558,28 @@ function openPreModal() {
 
 openPreModal();
 
+let btnOnOrder = [...document.querySelectorAll('.add-onorder')];
+
+function openOnOrder() {
+    if (btnOnOrder.length) {
+        btnOnOrder.forEach((btn) => {
+            let mod = document.querySelector('.modal-window[data-modal="onorder"]');
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                document.body.classList.add('no-scroll');
+                mod.classList.add('visible');
+            })
+        })
+    }
+}
+
+openOnOrder();
+
 
 // Получаем нужный элемент
-var elementBtns = document.querySelector('.product-pricing');
+var elementBtns = document.querySelector('.product-block');
 
 var Visible = function (target) {
     if (!elementBtns) {
@@ -517,13 +615,51 @@ var Visible = function (target) {
 
 };
 
+;var elementBtns2 = document.querySelector('.footer-bot');
+
+var Visible2 = function (target) {
+    if (!document.querySelector('.product-top-line')) {
+
+    } else {
+        var targetPosition = {
+                top: window.pageYOffset + target.getBoundingClientRect().top,
+                left: window.pageXOffset + target.getBoundingClientRect().left,
+                right: window.pageXOffset + target.getBoundingClientRect().right,
+                bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+            },
+            // Получаем позиции окна
+            windowPosition = {
+                top: window.pageYOffset + 80,
+                left: window.pageXOffset,
+                right: window.pageXOffset + document.documentElement.clientWidth,
+                bottom: window.pageYOffset + document.documentElement.clientHeight
+            };
+
+        if (targetPosition.bottom > windowPosition.top && // Если позиция нижней части элемента больше позиции верхней чайти окна, то элемент виден сверху
+            targetPosition.top < windowPosition.bottom && // Если позиция верхней части элемента меньше позиции нижней чайти окна, то элемент виден снизу
+            targetPosition.right > windowPosition.left && // Если позиция правой стороны элемента больше позиции левой части окна, то элемент виден слева
+            targetPosition.left < windowPosition.right) { // Если позиция левой стороны элемента меньше позиции правой чайти окна, то элемент виден справа
+            // Если элемент полностью видно, то запускаем следующий код
+            document.querySelector('.product-top-line').classList.add('visible2');
+        } else {
+            // Если элемент не видно, то запускаем этот код
+            document.querySelector('.product-top-line').classList.remove('visible2');
+        }
+        ;
+    }
+    // Все позиции элемента
+
+};
+
 // Запускаем функцию при прокрутке страницы
 window.addEventListener('scroll', function () {
     Visible(elementBtns);
+    Visible2(elementBtns2);
 });
 
 // А также запустим функцию сразу. А то вдруг, элемент изначально видно
 Visible(elementBtns);
+Visible2(elementBtns2);
 
 
 //remove item from cart
@@ -539,6 +675,7 @@ function removeItemCart() {
         })
     }
 }
+
 removeItemCart();
 
 //remove item from cart
@@ -580,4 +717,22 @@ function controlFaq() {
 controlFaq();
 
 //faq
+
+//confirm
+
+
+let btnConfirmOrder = document.querySelector('#button-confirm-order');
+
+function btnScrollToUp() {
+    if (btnConfirmOrder) {
+        $(btnConfirmOrder).click(function() {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $(".info-textuals").offset().top - 200
+            }, 600);
+        });
+    }
+}
+
+btnScrollToUp();
+//confirm
 
