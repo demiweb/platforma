@@ -207,7 +207,10 @@ function mainBannerSlider() {
                 slidesPerView: 1,
                 slidesPerGroup: 1,
                 speed: 600,
+                mousewheel: {
+                    forceToAxis: true,
 
+                },
                 autoplay: false,
                 spaceBetween: 40,
                 pagination: {
@@ -246,6 +249,10 @@ function lineStartSlider() {
                 navigation: {
                     nextEl: sldNext,
                     prevEl: sldPrev,
+                },
+                mousewheel: {
+                    forceToAxis: true,
+
                 },
                 autoplay: false,
                 direction: 'horizontal',
@@ -291,6 +298,10 @@ function modelStartSlider() {
                     nextEl: sldNext,
                     prevEl: sldPrev,
                 },
+                mousewheel: {
+                    forceToAxis: true,
+
+                },
                 autoplay: false,
                 spaceBetween: 5,
                 breakpoints: {
@@ -319,7 +330,7 @@ function modelStartSlider() {
 
 //search focus
 
-let searchIcon = document.querySelector('.search-icon');
+let searchIcon = document.querySelector('.header-bot .search-icon');
 
 function openSeach() {
     if (searchIcon) {
@@ -392,6 +403,8 @@ function controlModal() {
                 })
             })
         });
+
+
         closeModal.forEach((btn) => {
             btn.addEventListener('click', () => {
                 btn.closest('.modal-window').classList.remove('visible');
@@ -438,6 +451,13 @@ function controlModal() {
 
 controlModal();
 
+$(document).on('click','.btn-mod', function(e){
+    document.querySelector('.header-sqr .btn-mod[data-mod="call"]').click();
+});
+$(document).on('click','.cls', function(e){
+    this.closest('.modal-window').classList.remove('visible');
+    document.body.classList.remove('no-scroll');
+});
 //modal windows
 
 //tabs
@@ -615,7 +635,7 @@ var Visible = function (target) {
 
 };
 
-;var elementBtns2 = document.querySelector('.footer-bot');
+var elementBtns2 = document.querySelector('.footer-bot');
 
 var Visible2 = function (target) {
     if (!document.querySelector('.product-top-line')) {
@@ -651,15 +671,55 @@ var Visible2 = function (target) {
 
 };
 
+
+var elementBtns3 = document.querySelector('.links-on-page-stick.desk');
+
+
+var Visible3 = function (target) {
+    if (!elementBtns3) {
+
+    } else {
+        var targetPosition = {
+                top: window.pageYOffset + target.getBoundingClientRect().top,
+                left: window.pageXOffset + target.getBoundingClientRect().left,
+                right: window.pageXOffset + target.getBoundingClientRect().right,
+                bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+            },
+            // Получаем позиции окна
+            windowPosition = {
+                top: window.pageYOffset + 80,
+                left: window.pageXOffset,
+                right: window.pageXOffset + document.documentElement.clientWidth,
+                bottom: window.pageYOffset + document.documentElement.clientHeight
+            };
+
+        if (targetPosition.bottom > windowPosition.top && // Если позиция нижней части элемента больше позиции верхней чайти окна, то элемент виден сверху
+            targetPosition.top < windowPosition.bottom && // Если позиция верхней части элемента меньше позиции нижней чайти окна, то элемент виден снизу
+            targetPosition.right > windowPosition.left && // Если позиция правой стороны элемента больше позиции левой части окна, то элемент виден слева
+            targetPosition.left < windowPosition.right) { // Если позиция левой стороны элемента меньше позиции правой чайти окна, то элемент виден справа
+            // Если элемент полностью видно, то запускаем следующий код
+            document.querySelector('.links-on-scroll').classList.remove('vis');
+        } else {
+            // Если элемент не видно, то запускаем этот код
+            document.querySelector('.links-on-scroll').classList.add('vis');
+        }
+        ;
+    }
+    // Все позиции элемента
+
+};
+
 // Запускаем функцию при прокрутке страницы
 window.addEventListener('scroll', function () {
     Visible(elementBtns);
     Visible2(elementBtns2);
+    Visible3(elementBtns3);
 });
 
 // А также запустим функцию сразу. А то вдруг, элемент изначально видно
 Visible(elementBtns);
 Visible2(elementBtns2);
+Visible3(elementBtns3);
 
 
 //remove item from cart
@@ -682,6 +742,7 @@ removeItemCart();
 
 //menu subMenu
 let submenuItems = [...document.querySelectorAll('.modal-menu__cont .header-center__menu .has-submenu > a')];
+let submenuItems2 = [...document.querySelectorAll('.modal-menu__cont .header-center__menu .has-submenu > ul > li > a')];
 
 function controlSubMenu() {
     if (submenuItems.length) {
@@ -690,6 +751,13 @@ function controlSubMenu() {
                 e.preventDefault();
                 e.stopPropagation();
                 btn.closest('.has-submenu').classList.toggle('open');
+            })
+        });
+        submenuItems2.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                btn.closest('li').classList.toggle('open');
             })
         })
     }
@@ -733,6 +801,182 @@ function btnScrollToUp() {
     }
 }
 
-btnScrollToUp();
+// btnScrollToUp();
+
+$('body').on('click','#button-confirm-order',function(){
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $(".info-textuals").offset().top - 200
+    }, 600);
+});
 //confirm
+
+
+//price change
+
+function getRaty() {
+    $('.rating-stars').each(function (index) {
+        if ($(this).html() == '') {
+            $(this).raty({
+                readOnly: true,
+                starHalf: 'catalog/view/theme/platforma/image/star-full.svg',
+                starOn: 'catalog/view/theme/platforma/image/star-full.svg',
+                starOff: 'catalog/view/theme/platforma/image/star-clear.svg',
+                hints: ['a', null, '', null, '', null]
+            });
+        }
+    });
+}
+
+getRaty();
+
+
+let startsRateModal = [...document.querySelectorAll('.rate .sg-rate')];
+
+function hoverStarsRate(startsRateModal) {
+    if (!startsRateModal.length) {
+
+    } else {
+        startsRateModal.forEach((st, k) => {
+            let number = k + 1;
+            st.addEventListener('mouseover', () => {
+                st.classList.add('hover');
+                for (let i = 0; i < k; i++) {
+                    startsRateModal[i].classList.add('hover');
+                }
+            });
+            st.addEventListener('mouseout', () => {
+                st.classList.remove('hover');
+                for (let i = 0; i < k; i++) {
+                    startsRateModal[i].classList.remove('hover');
+                }
+            });
+            st.addEventListener('click', () => {
+                startsRateModal.forEach((st2) => {
+                    st2.classList.remove('clicked');
+                });
+                st.classList.add('clicked');
+                st.closest('.form').querySelector('.input-rating-hidden input').value = number;
+                for (let i = 0; i < k; i++) {
+                    startsRateModal[i].classList.add('clicked');
+                }
+            })
+        })
+    }
+}
+
+
+hoverStarsRate(startsRateModal);
+
+
+//scrolling-menu
+
+//chars hovering
+
+
+let progressBtns = [...document.querySelectorAll('.links-on-page-stick li a')];
+
+function goToSectionProg() {
+    if (progressBtns.length) {
+        progressBtns.forEach((btn) => {
+            let numb = btn.dataset.prog;
+            if (numb) {
+                let el = document.querySelector(`.page-section[data-sec="${numb}"]`);
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+
+                    if (window.innerWidth < 768) {
+                        if (btn.classList.contains('tab')) {
+                            document.querySelector(`.${btn.dataset.link}`).click();
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: $(el).offset().top - 100
+                            }, 500);
+                        } else {
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: $(el).offset().top - 90
+                            }, 500);
+                        }
+
+                    } else {
+                        if (btn.classList.contains('tab')) {
+                            document.querySelector(`.${btn.dataset.link}`).click();
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: $(el).offset().top - 250
+                            }, 500);
+                        } else {
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: $(el).offset().top - 180
+                            }, 500);
+                        }
+
+
+                    }
+
+
+                })
+            }
+
+        })
+    }
+}
+
+goToSectionProg();
+
+const sections = document.querySelectorAll(".page-section");
+
+// Add an event listener listening for scroll
+
+function navHighlighter() {
+
+    // Get current scroll position
+    let scrollY = window.pageYOffset;
+
+    // Now we loop through sections to get height, top and ID values for each
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - (sectionHeight / 3.2);
+        sectionId = current.dataset.sec;
+
+        if (
+            scrollY > sectionTop - 200 &&
+            scrollY <= sectionTop + sectionHeight + 400
+        ) {
+            console.log(sectionId);
+
+            [...document.querySelectorAll(".links-on-page-stick li a")].forEach((bts, k) => {
+                if (k === (sectionId - 1)) {
+                    bts.classList.add('active');
+                } else {
+                    bts.classList.remove('active');
+                }
+            })
+        }
+    });
+}
+
+
+window.onscroll = function () {
+    // navHighlighter();
+};
+
+let xmarkRadioRemover = [...document.querySelectorAll('.additive-input .xmark')];
+
+function removeRadioChecked() {
+    if (xmarkRadioRemover.length) {
+        xmarkRadioRemover.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                btn.closest('.additive-input').querySelector('input').checked = false;
+            })
+        })
+    }
+}
+
+removeRadioChecked();
+
+//scrolling-menu
+
 
